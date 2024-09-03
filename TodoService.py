@@ -14,10 +14,10 @@ class TodoService:
         return self.mongoClient.findAll('todo')
     
     def checkTodo(self, id):
-        self.mongoClient.update('todo', {'_id': id}, {"$set" : {"status": True}})
+        self.mongoClient.updateFromId('todo', id, {"$set" : {"status": True}})
     
     def uncheckTodo(self, id):
-        self.mongoClient.update('todo', {'_id': id}, {"$set" : {"status": False}})
+        self.mongoClient.updateFromId('todo', id, {"$set" : {"status": False}})
     
     def deleteTodo(self, id):
-        self.mongoClient.delete('todo', {'_id': id})
+        self.mongoClient.deleteFromId('todo', id)

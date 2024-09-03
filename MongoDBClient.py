@@ -1,3 +1,4 @@
+from bson import ObjectId
 from pymongo import MongoClient
 
 
@@ -22,8 +23,14 @@ class MongoDBClient:
     def delete(self, collection:str, filter: dict):
         self.db[collection].delete_many(filter)
 
+    def deleteFromId(self, collection:str, id: str):
+        self.db[collection].delete_one({'_id': ObjectId(id)})
+
     def update(self, collection:str, filter: dict, update: dict):
         self.db[collection].update_many(filter, update)
+
+    def updateFromId(self, collection:str, id: str, update: dict):
+        self.db[collection].update_many({'_id': ObjectId(id)}, update)
 
     def dropDatabase(self, database: str):
         self.client.drop_database(database)
