@@ -19,6 +19,19 @@ services:
     networks:
       - mongodb_network
 
+  myapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: myapp
+    restart: always
+    ports:
+      - 5000:5000
+    networks:
+      - mongodb_network
+    depends_on:
+      - mongodb
+
   mongo-express:
     image: mongo-express:latest
     container_name: mongo-express

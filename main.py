@@ -5,7 +5,7 @@ from TodoService import TodoService
 
 app = Flask(__name__)
 
-mongoClient = MongoDBClient("mongodb://root:password@localhost:27017/", "app")
+mongoClient = MongoDBClient("mongodb://root:password@mongodb:27017/", "app")
 todoService = TodoService(mongoClient)
 
 @app.get("/")
@@ -42,5 +42,5 @@ def addTodo():
     return redirect('/')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5000, host='0.0.0.0')
 
